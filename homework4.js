@@ -1,9 +1,9 @@
 /* 
  Name: Hailey Haiducek
- File: homework3.js
- Date Created: 6/30/2026
- Date Updated: 7/5/2026
- Purpose: External JavaScript file - Homework 3
+ File: homework4.js
+ Date Created: 7/7/2026
+ Date Updated: 
+ Purpose: External JavaScript file - Homework 4
 */
 
 //https://jakeuh.github.io/MIS3371/hw4/hw4.html was used as a template for loop/switch structure and on-the-fly validation patterns
@@ -471,4 +471,4 @@ function removeData() {
     };
 }
 
-/* End of file: homework3.js */
+/* End of file: homework4.js */
