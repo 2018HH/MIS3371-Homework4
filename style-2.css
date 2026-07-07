@@ -1,0 +1,134 @@
+/* 
+ Name: Hailey Haiducek
+ File: homework3.css
+ Date Created: 6/30/2026
+ Date Updated: 7/5/2026
+ Purpose: Style sheet for patient registration form - Homework 3
+*/
+
+/* https://profjake.w3spaces.com/MIS3371/homework1.html and https://www.w3schools.com/css/default.asp was used as a template for css stylesheet */
+
+/* General page styling */
+body {
+    background-color: #f0f8ff;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+/* Main page */
+ h1 {
+    text-align: center;
+    color: midnightblue;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 32px;
+    margin: 0;
+}
+
+/* Main form styling */
+table.form {
+  width: 70%;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color:white;
+  padding: 20px;
+  border-spacing: 00px;
+  color:midnightblue;
+}
+
+/* Top-align every cell */
+table.form td {
+  vertical-align: top;
+  padding: 4px 6px;
+}
+
+/* Table header styling */
+th.form {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color:white;
+  padding: 20px;
+  border-spacing: 20px;
+  color:midnightblue;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#header {
+        background-color: Aliceblue;
+        color: midnightblue;
+        text-align: center;
+        padding: 15px;
+}
+#footer {
+        background-color: AliceBlue;
+        color: midnightblue;
+        text-align: center;
+        padding: 20px;
+}
+#logo {
+    width: 250px;
+    height:auto;
+}
+#state {
+    width: 70px;
+}
+.form {
+        background-color: white;
+}
+.textsize1 
+{
+    width:10px
+}
+.textsize5 
+{
+    width:40px
+}
+
+/* Validation Styling */
+.error {
+    color: #dc3545;
+    font-size: 13px;
+    font-weight: bold;
+    display: block;
+    min-height: 16px;
+    margin-top: 2px;
+}
+
+.passwordhint {
+    color: #666666;
+    font-size: 12px;
+    display: block;
+    min-height: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: 2px solid midnightblue;
+    background-color: #f7faff;
+}
+
+#submissionArea {
+    margin: 15px 0;
+    display: inline-block;
+}
+
+table.output {
+    width: 70%;
+    margin-top: 10px;
+    border-collapse: collapse;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    color: midnightblue;
+}
+
+table.output th,
+table.output td {
+    border: 1px solid #cfd8e3;
+    padding: 6px 10px;
+}
+
+table.output th {
+    background-color: AliceBlue;
+}
+
+.outputdata {
+    font-weight: bold;
+}
+     
+/* End of homework 3 styling sheet */
