@@ -27,10 +27,80 @@ let fieldErrors = {
     confirmpassword: true
 };
 
+/* Field Lists | Local storage: SSN and both password fields are intentionally omitted since they are secure data */
+const SAFE_TEXT_FIELDS = [
+    "firstname", "middleinit", "lastname", "dob",
+    "addr1", "addr2", "city", "state", "zip",
+    "phone", "email", "symptoms", "userid", "health"
+ ];
+const SAFE_CHECKBOX_IDS = [
+    "prefemail", "smstext", "phonecall", "voicemail", "direct"
+ ];
+const SAFE_RADIO_GROUPS = [
+    "gender", "vaccinated", "insurance"
+ ];
+const STORAGE_PREFIX = "patientForm_";
+const COOKIE_NAME = "patientFirstName";
+
 /* SETUP - runs on body onload */
 function setup() {
     document.getElementById("submit").style.display = "none";
+
+// Fetch API: pull state list and medical history checkboxes from separate files
+loadStates();
+loadConditions();
+
+// Cookie verification
+checkReturningUser();
+
+// Attach auto-save to local storage listeners for every field
+attachStorageAutosave();
+
+// Content protection: on-scroll sticky header (see CSS .sticky class)
+initStickyHeader();
 }
+
+/* Content Protection - On-Scroll Sticky Header (adapted from w3schools.com/howto/howto_css_fixed_header.asp, the same tutorial linked in the assignment.
+Footer uses fixed rule and the separate "fixed footer" technique from the same assignment. Both required techniques are demonstrated on two different elements.
+*/
+function initStickyHeader() {
+    let header = document.getElementById("header");
+    let stickyPoint = header.offsetTop;
+
+    window.onscroll = function () {
+        if (window.pageYOffset > stickyPoint) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    };
+}
+
+/* Fetch API */
+
+// Load state dropdown from states.json
+async function loadStates() {
+    const stateSelect = document.getElementById("state");
+    try {
+         const response = await fetch("states.json");
+         if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+         }
+         const states = await response.json();
+
+     // Clear "Loading states... placeholder, then rebuild list
+     stateSelect.innerHTML = "";
+     let blank = document.createElement("optiom");
+     blank.value = ""
+     blank.textContent = "Select State"'
+     stateSelect.appendChild(blank);
+
+     states.forEach(function (st) {
+       let opt = document.createElement("option")
+       opt.value = st.code;
+       opt.textContent = st.name;
+       stateSelect.appendChild(opt);
+     });
 
 /* First name - 2-30 characters, letters/apostrophes/hyphens/spaces only */
 function checkFirstName() {
