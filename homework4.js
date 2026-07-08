@@ -46,9 +46,8 @@ const COOKIE_NAME = "patientFirstName";
 function setup() {
     document.getElementById("submit").style.display = "none";
 
-// Fetch API: pull state list and medical history checkboxes from separate files
+// Fetch API: pull state list from separate file
 loadStates();
-loadConditions();
 
 // Cookie verification
 checkReturningUser();
@@ -101,7 +100,57 @@ async function loadStates() {
        opt.textContent = st.name;
        stateSelect.appendChild(opt);
      });
+/* If there is a saved state value from a previous visit, re-select it (loadFromStorage runs later, but the
+select has to be populated first) */
+     if (localStorage.getItem(STORAGE_PREFIX + "state")) {
+         stateSelect.value = localStorage.getItem(STORAGE_PREFIX + "state");
+     }
+    //If fetch fails, don't leave user with broken dropdown
+    } catch (err) {
+        stateSelect.innerHTML = '<option value"">Unable to load states</option>';
+        console.error("Could not load states.json:", err);
+    }
+}
 
+/* Cookies (w3schools.com/js/js_cookies.asp was used as a template */
+function setCookie(name, value, hours) {
+   let d = new Date();
+   d.setTime(d.getTime() + hours * 60 * 60 * 1000));
+   let expires = "expires=" + d.toUTCString();
+   document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+   let cname = name + "=";
+   let decoded = decodeURIComponent(document.cookie);
+   let parts = decoded.split(";");
+   for (let i=0; i < parts.length; i++) {
+      let part = parts[i].trim();
+      if (part.indexOf(cname) === 0) {
+         return part.substring(cname.length);
+      }
+   }
+   return "";
+}
+
+function eraseCookie(name) {
+   document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+}
+
+/* Runs one time on page load and looks for the first-name cookie - user is then either welcomed back or greeted as a new user */
+function checkReturningUser() {
+    let greeting = document.getElementById("greetingMessage");
+    let notMeLink = document.getElementById("notMeLink");
+    let savedName = getCookie(COOKIE_NAME);
+
+    if (savedname !== "") {
+       let isThem = confirm(
+          "Welcome back " + savedName + ".\nPress OK to confirm, or Cancel if this is not " + savedName + "."
+        );
+
+     if (isThem) {
+        greeting.innerHTML 
+   
 /* First name - 2-30 characters, letters/apostrophes/hyphens/spaces only */
 function checkFirstName() {
     let val = document.getElementById("firstname").value;
