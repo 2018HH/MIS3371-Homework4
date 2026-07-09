@@ -19,7 +19,7 @@ Description: Homework 4 patient registration form
 		<script src="homework4.js" defer></script>
     </head>
     <body onload="setup()">
-		<!-- Header -->
+		<!-- Header: uses position:sticky (refer to CSS) -->
         <div id="header"> 
             <table width="100%">
                 <tr>
@@ -40,6 +40,9 @@ Description: Homework 4 patient registration form
 					</td>
                 </tr>
             </table>
+			<!-- Cookie greeting completed by checkReturningUser() in homework4.js -->
+			<div id="greetingMessage"></div>
+			<div id="notMeLink"></div>
         </div>
         <hr>
 		
@@ -192,66 +195,14 @@ Description: Homework 4 patient registration form
 					onblur="checkCity()"
             >
 			<span class="error" id="city_message"></span>
-			<!-- Dropdown list sourced from https://www.freeformatter.com/usa-state-list-html-select.html -->
+			<!-- State options are no longer hard-coded | uses loadStates() in homework4.js to fetch from states.json -->
             <select 
 				id="state"
 				name="state"
 				required
 				onchange="checkState()"
 				>
-                <option value="">Select State</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="DC">District Of Columbia</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
-				<option value="PR">Puerto Rico</option>
+                <option value="">Loading states...</option>
             </select>
 			<span class="error" id="state_message"></span>
             <input type="text" 
@@ -368,8 +319,8 @@ Description: Homework 4 patient registration form
 			<label for="yes">Yes</label>
 		  	<input type="radio" name="vaccinated" id="vaccinatedNo" value="No">
 			<label for="no">No</label>
-			<input type="radio" name="vaccinated" id="other" value="Prefer not to answer">
-			<label for="other">Prefer not to say</label>
+			<input type="radio" name="vaccinated" id="vaccinatedOther" value="Prefer not to answer">
+			<label for="vaccinatedOther">Prefer not to say</label>
 		</td>
 	</tr>
 	   
@@ -463,6 +414,17 @@ Description: Homework 4 patient registration form
 		</td>
 		<td><span class="error" id="password2_message"></span></td>
 	</tr>
+
+<!-- Remember Me | first-name cookie + local storage in homework4.js -->
+<tr class="form" id="rememberMeRow">
+	<td align="right">
+		<label for="rememberMe">Remember Me</label>
+	</td>
+	<td>
+		<input type="checkbox" id="rememberMe" checked>
+		<label for="rememberMe">Remember my information on this device for 48 hours</label>
+	</td>
+</tr>
 	   
 <!-- Validate, Review, Submit, & Reset buttons -->
     <tr>        
@@ -500,7 +462,23 @@ Description: Homework 4 patient registration form
 <!-- Review Button -->
 	<div id="outputformdata"></div>
 <hr>
-<!-- Footer -->
+
+<!-- iFrame: embedded, clickable Google Map displaying clinic location -->
+<div id="mapSection">
+	<h3>Find Us</h3>
+	<iframe
+		title="Hailey Medical Center location"
+		src="https://www.google.com/maps?q=Houston,TX&output=embed"
+		width="600"
+		height="350"
+		style="border:0"
+		loading="lazy"
+		referrerpolicy="no-referrer-when-downgrade">
+	</iframe>
+</div>
+<hr>
+
+<!-- Footer: uses position:fixed (refer to CSS) -->
         <div id="footer">
 			<p>Hailey Medical Center</p>
 			<p>PO Box 911</p>
