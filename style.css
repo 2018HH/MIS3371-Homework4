@@ -118,7 +118,20 @@ th.form {
     width:40px
 }
 
-/* Remember me
+/* Remember me + map section */
+#rememberMeRow {
+   margin-top: 10px;
+   font-size: 14px;
+}
+#mapSection {
+   width: 70%;
+   margin: 20px auto;
+   text-align: center;
+}
+#mapSection iframe {
+   border: 2px solid midnightblue;
+   border-radius: 4px;
+}
 
 /* Validation Styling */
 .error {
