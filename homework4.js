@@ -246,13 +246,41 @@ function loadFormFromStorage() {
           el.value = saved;
        }
    });
- SAFE_CHECKBOX.IDS.forEach(function (id) {
+ SAFE_CHECKBOX_IDS.forEach(function (id) {
       let saved = localStorage.getItem(STORAGE_PREFIX + id);
       let el document.getElementById(id)
       if (saved === "true" && el) {
         el.checked = true;
       }
  });
+
+  SAFE_RADIO_GROUPS.forEach(function (groupName) {
+      let saved = localStorage.getItem(STORAGE_PREFIX + groupName);
+      if (saved !== null) {
+          let radios = document.getElementByName(groupName);
+          radios.forEach(function (radio) {
+            if (radio.value === saved) {
+               radio.checked = true;
+      }
+    });
+   }
+ });
+
+ // Load health value back on the slider's number display
+ updateSlider();
+
+// Removes every key this form ever wrote to localStorage
+function clearFormStorage() {
+   SAFE_TEXT_FIELDS.forEach(function (id) {
+      removeFromStorage(id);
+   });
+   SAFE_CHECKBOX_IDS.forEach(function (id) {
+      removeFromStorage(id);
+   });
+   SAFE_RADIO_GROUPS.forEach(function (groupName) {
+      removeFromStorage(groupName);
+   });
+}
 /* First name - 2-30 characters, letters/apostrophes/hyphens/spaces only */
 function checkFirstName() {
     let val = document.getElementById("firstname").value;
