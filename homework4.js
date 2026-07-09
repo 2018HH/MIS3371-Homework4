@@ -149,8 +149,110 @@ function checkReturningUser() {
         );
 
      if (isThem) {
-        greeting.innerHTML 
-   
+        greeting.innerHTML = "Welcome back, " + savedName + "!";
+        document.getElementById("firstname").value = savedName;
+
+      //Opt out link in case user wants to switch users in the same session
+      notMeLink.innerHTML = 'Not ' + savedName + '? <a href="#" onclick="startNewUser(); return false;
+                             ">Click here to start as a new user. </a>';
+      notMeLink.style.display = "block";
+
+      //Pull the rest of their remembered data back into the form
+      loadFormFromStorage();
+     } else {
+       //If visitor states "this isn't me", they are treated like a new user
+       startNewUser();
+     }
+    } else {
+        greeting.innerHTML = "Welcome, new user!";
+        notMeLink.style.display = "none";
+    }
+}
+
+/* Called when visitor clicks "Not <name>? Click here to create a new user."
+   Cookie is then expired, local storage is wiped, and form is cleared.
+*/
+function startNewUser() {
+    eraseCookie(COOKIE_NAME);
+    clearFormStorage();
+    document.getElementById("patientform").reset();
+    removeData();
+
+    document.getElementById("greetingMessage").innerHTML = "Welcome, new user!";
+    document.getElementById("notMeLine").style.display = "none";
+    document.getElementById("notMeLink").innerHTML = "";
+}
+
+//Local storage (localStorage pattern from w3schools.com/jsref/prop_win_localstorage.asp)
+function saveToStorage(key, value) {
+    localStorage.setItem(STORAGE_PREFIX + key, value);
+}
+
+function removeFromStorage(key) {
+    localStorage.removeItem(STORAGE_PREFIX + key);
+}
+
+//Attaches "save as you leave" field listeners to every safe field (not for SSN and password fields)
+function attachStorageAutosave() {
+   SAFE_TEXT_FIELDS.forEach(function (id) {
+       let el = document.getElementById(id);
+       if (!el) return;
+       let evt = (el.tagName === "SELECT" || el.type === "range" ? "change" : "blur";
+
+       el.addEventListener(evt, function () {
+          saveToStorage(id, this.value);
+       });
+   });
+   SAFE_CHECKBOX_IDS.forEach(function (id) {
+       let el = document.getElementById(id);
+       if (!el) return;
+       el.addEventListener("change", function () {
+          saveToStorage(id, this.checked);
+       });
+   });
+
+   SAFE_RADIO_GROUPS.forEach(function (groupName) {
+       let radios = document.getElementByName(groupName);
+       radios.forEach(function (radio) {
+          radio.addEventListener("change", function () {
+             if (this.checked) {
+                saveToStorage(groupName, this.value);
+             }
+          });
+       });
+
+     // "Remember Me" checkbox (unchecking immediately forgets visitor
+    let rememberMe = document.getElementById("rememberMe");
+    rememberMe.addEventListener("change", function() {
+      if(!this.checked) {
+         eraseCookie(COOKIE_NAME);
+         clearFormStorage();
+      } else {
+        // Re-checking it re-saves what is currently in the form
+        let firstname = document.getElementById("firstname").value;
+        if (firstname !== "") {
+          setCookie(COOKIE_NAME, firstname, 48);
+        }
+      }
+    });
+   }
+/* Reads everything back out from localStorage into matching form fields
+   (only runs if returning visitor cookie is located */
+function loadFormFromStorage() {
+   SAFE_TEXT_FIELDS.forEach(function (id) {
+       let saved = localStorage.getItem(STORAGE_PREFIX + id);
+       let el = document.getElementById(id);
+       if (saved !== null && el) {
+          el.value = saved;
+       }
+   });
+ SAFE_CHECKBOX.IDS.forEach(function (id) {
+      let saved = localStorage.getItem(STORAGE_PREFIX + id);
+      let el document.getElementById(id)
+      if (saved === "true" && el) {
+        el.checked = true;
+      }
+ });
 /* First name - 2-30 characters, letters/apostrophes/hyphens/spaces only */
 function checkFirstName() {
     let val = document.getElementById("firstname").value;
