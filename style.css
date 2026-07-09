@@ -7,11 +7,14 @@
 */
 
 /* https://profjake.w3spaces.com/MIS3371/homework1.html and https://www.w3schools.com/css/default.asp was used as a template for css stylesheet */
+/* https://www.w3schools.com/howto/howto_css_fixed_header.asp and howto_css_fixed_footer.asp used for the sticky/fixed positioning technique */
 
 /* General page styling */
 body {
     background-color: #f0f8ff;
     font-family: "Source Sans Pro", sans-serif;
+    margin: 0;
+    padding-bottom: 90px;
 }
 
 /* Main page */
@@ -23,6 +26,53 @@ body {
     margin: 0;
 }
 
+/* Content protection | sticky for header and fixed for footer */
+#header {
+   background-color: AliceBlue;
+   color: midnightblue;
+   text-align: center;
+   padding: 15px;
+}
+
+/* on scroll fixed header technique from w3schools.com/howto/howto_css_fixed_header.asp */
+.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+#footer {
+    background-color: AliceBlue;
+    color: midnightblue;
+    text-align: center;
+    padding: 10px, 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%
+    box-sizing: border-box;
+    z-index: 100;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Greeting / returning-user banner inside header */
+#greetingMessage {
+    font-weight: bold;
+    color: midnightblue;
+    display: block;
+}
+#notMeLink {
+    font-size: 13px;
+    color: #444;
+}
+#notMeLink a {
+    color: #b03060;
+    font-weight: bold;
+}
+     
 /* Main form styling */
 table.form {
   width: 70%;
@@ -49,19 +99,6 @@ th.form {
   margin-left: auto;
   margin-right: auto;
 }
-
-#header {
-        background-color: Aliceblue;
-        color: midnightblue;
-        text-align: center;
-        padding: 15px;
-}
-#footer {
-        background-color: AliceBlue;
-        color: midnightblue;
-        text-align: center;
-        padding: 20px;
-}
 #logo {
     width: 250px;
     height:auto;
@@ -80,6 +117,8 @@ th.form {
 {
     width:40px
 }
+
+/* Remember me
 
 /* Validation Styling */
 .error {
