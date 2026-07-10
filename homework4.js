@@ -91,7 +91,7 @@ async function loadStates() {
      stateSelect.innerHTML = "";
      let blank = document.createElement("optiom");
      blank.value = ""
-     blank.textContent = "Select State"'
+     blank.textContent = "Select State"
      stateSelect.appendChild(blank);
 
      states.forEach(function (st) {
@@ -115,7 +115,7 @@ select has to be populated first) */
 /* Cookies (w3schools.com/js/js_cookies.asp was used as a template */
 function setCookie(name, value, hours) {
    let d = new Date();
-   d.setTime(d.getTime() + hours * 60 * 60 * 1000));
+   d.setTime(d.getTime() + hours * 60 * 60 * 1000);
    let expires = "expires=" + d.toUTCString();
    document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
 }
@@ -197,7 +197,7 @@ function attachStorageAutosave() {
    SAFE_TEXT_FIELDS.forEach(function (id) {
        let el = document.getElementById(id);
        if (!el) return;
-       let evt = (el.tagName === "SELECT" || el.type === "range" ? "change" : "blur";
+       let evt = (el.tagName === "SELECT" || el.type === "range" ? "change" : "blur");
 
        el.addEventListener(evt, function () {
           saveToStorage(id, this.value);
@@ -212,7 +212,7 @@ function attachStorageAutosave() {
    });
 
    SAFE_RADIO_GROUPS.forEach(function (groupName) {
-       let radios = document.getElementByName(groupName);
+       let radios = document.getElementsByName(groupName);
        radios.forEach(function (radio) {
           radio.addEventListener("change", function () {
              if (this.checked) {
@@ -257,7 +257,7 @@ function loadFormFromStorage() {
   SAFE_RADIO_GROUPS.forEach(function (groupName) {
       let saved = localStorage.getItem(STORAGE_PREFIX + groupName);
       if (saved !== null) {
-          let radios = document.getElementByName(groupName);
+          let radios = document.getElementsByName(groupName);
           radios.forEach(function (radio) {
             if (radio.value === saved) {
                radio.checked = true;
