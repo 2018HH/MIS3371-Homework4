@@ -248,7 +248,7 @@ function loadFormFromStorage() {
    });
  SAFE_CHECKBOX_IDS.forEach(function (id) {
       let saved = localStorage.getItem(STORAGE_PREFIX + id);
-      let el document.getElementById(id)
+      let el = document.getElementById(id)
       if (saved === "true" && el) {
         el.checked = true;
       }
@@ -268,7 +268,7 @@ function loadFormFromStorage() {
 
  // Load health value back on the slider's number display
  updateSlider();
-
+}
 // Removes every key this form ever wrote to localStorage
 function clearFormStorage() {
    SAFE_TEXT_FIELDS.forEach(function (id) {
