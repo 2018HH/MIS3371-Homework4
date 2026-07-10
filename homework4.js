@@ -107,7 +107,7 @@ select has to be populated first) */
      }
     //If fetch fails, don't leave user with broken dropdown
     } catch (err) {
-        stateSelect.innerHTML = '<option value"">Unable to load states</option>';
+        stateSelect.innerHTML = '<option=value"">Unable to load states</option>';
         console.error("Could not load states.json:", err);
     }
 }
