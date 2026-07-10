@@ -42,7 +42,6 @@ const SAFE_RADIO_GROUPS = [
 const STORAGE_PREFIX = "patientForm_";
 const COOKIE_NAME = "patientFirstName";
 
-/* SETUP - runs on body onload */
 function setup() {
     document.getElementById("submit").style.display = "none";
 
