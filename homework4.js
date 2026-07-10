@@ -153,8 +153,7 @@ function checkReturningUser() {
         document.getElementById("firstname").value = savedName;
 
       //Opt out link in case user wants to switch users in the same session
-      notMeLink.innerHTML = 'Not ' + savedName + '? <a href="#" onclick="startNewUser(); return false;
-                             ">Click here to start as a new user. </a>';
+      notMeLink.innerHTML = 'Not ' + savedName + '? <a href="#" onclick="startNewUser(); return false; ">Click here to start as a new user. </a>';
       notMeLink.style.display = "block";
 
       //Pull the rest of their remembered data back into the form
