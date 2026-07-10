@@ -89,7 +89,7 @@ async function loadStates() {
 
      // Clear "Loading states... placeholder, then rebuild list
      stateSelect.innerHTML = "";
-     let blank = document.createElement("optiom");
+     let blank = document.createElement("option");
      blank.value = ""
      blank.textContent = "Select State"
      stateSelect.appendChild(blank);
