@@ -143,7 +143,7 @@ function checkReturningUser() {
     let notMeLink = document.getElementById("notMeLink");
     let savedName = getCookie(COOKIE_NAME);
 
-    if (savedname !== "") {
+    if (savedName !== "") {
        let isThem = confirm(
           "Welcome back " + savedName + ".\nPress OK to confirm, or Cancel if this is not " + savedName + "."
         );
