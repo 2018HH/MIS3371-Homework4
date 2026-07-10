@@ -234,7 +234,8 @@ function attachStorageAutosave() {
         }
       }
     });
-   }
+   });
+}
 /* Reads everything back out from localStorage into matching form fields
    (only runs if returning visitor cookie is located */
 function loadFormFromStorage() {
