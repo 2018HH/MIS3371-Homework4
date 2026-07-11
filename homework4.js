@@ -45,21 +45,14 @@ const COOKIE_NAME = "patientFirstName";
 function setup() {
     document.getElementById("submit").style.display = "none";
 
-// Fetch API: pull state list from separate file
 loadStates();
-
-// Cookie verification
 checkReturningUser();
-
-// Attach auto-save to local storage listeners for every field
 attachStorageAutosave();
-
-// Content protection: on-scroll sticky header (see CSS .sticky class)
 initStickyHeader();
 }
 
 /* Content Protection - On-Scroll Sticky Header (adapted from w3schools.com/howto/howto_css_fixed_header.asp, the same tutorial linked in the assignment.
-Footer uses fixed rule and the separate "fixed footer" technique from the same assignment. Both required techniques are demonstrated on two different elements.
+Footer uses fixed rule and the separate "fixed footer" technique from the same assignment.
 */
 function initStickyHeader() {
     let header = document.getElementById("header");
@@ -86,7 +79,7 @@ async function loadStates() {
          }
          const states = await response.json();
 
-     // Clear "Loading states... placeholder, then rebuild list
+     // Clear "Loading states... placeholder
      stateSelect.innerHTML = "";
      let blank = document.createElement("option");
      blank.value = ""
@@ -99,12 +92,11 @@ async function loadStates() {
        opt.textContent = st.name;
        stateSelect.appendChild(opt);
      });
-/* If there is a saved state value from a previous visit, re-select it (loadFromStorage runs later, but the
-select has to be populated first) */
+
      if (localStorage.getItem(STORAGE_PREFIX + "state")) {
          stateSelect.value = localStorage.getItem(STORAGE_PREFIX + "state");
      }
-    //If fetch fails, don't leave user with broken dropdown
+
     } catch (err) {
         stateSelect.innerHTML = '<option=value"">Unable to load states</option>';
         console.error("Could not load states.json:", err);
@@ -167,9 +159,7 @@ function checkReturningUser() {
     }
 }
 
-/* Called when visitor clicks "Not <name>? Click here to create a new user."
-   Cookie is then expired, local storage is wiped, and form is cleared.
-*/
+// Called when visitor clicks "Not <name>? Click here to create a new user."
 function startNewUser() {
     eraseCookie(COOKIE_NAME);
     clearFormStorage();
@@ -190,7 +180,6 @@ function removeFromStorage(key) {
     localStorage.removeItem(STORAGE_PREFIX + key);
 }
 
-//Attaches "save as you leave" field listeners to every safe field (not for SSN and password fields)
 function attachStorageAutosave() {
    SAFE_TEXT_FIELDS.forEach(function (id) {
        let el = document.getElementById(id);
@@ -219,14 +208,14 @@ function attachStorageAutosave() {
           });
        });
 
-     // "Remember Me" checkbox (unchecking immediately forgets visitor
+     // "Remember Me" checkbox 
     let rememberMe = document.getElementById("rememberMe");
     rememberMe.addEventListener("change", function() {
       if(!this.checked) {
          eraseCookie(COOKIE_NAME);
          clearFormStorage();
       } else {
-        // Re-checking it re-saves what is currently in the form
+
         let firstname = document.getElementById("firstname").value;
         if (firstname !== "") {
           setCookie(COOKIE_NAME, firstname, 48);
