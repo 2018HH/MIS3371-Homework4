@@ -167,7 +167,7 @@ function startNewUser() {
     removeData();
 
     document.getElementById("greetingMessage").innerHTML = "Welcome, new user!";
-    document.getElementById("notMeLine").style.display = "none";
+    document.getElementById("notMeLink").style.display = "none";
     document.getElementById("notMeLink").innerHTML = "";
 }
 
